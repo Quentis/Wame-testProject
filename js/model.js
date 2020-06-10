@@ -15,7 +15,7 @@ export default class Model extends EventHandler {
      */
     async fetchProducts(/*url*/) {
         // ES7 - Async/Await and FetchAPI requesting data from Storage (API) - we are requesting Products
-        const response = await fetch("https://api.jsonbin.io/b/5edf862d1f9e4e57881a4db2/6", {
+        const response = await fetch("https://api.jsonbin.io/b/5ee155541f9e4e57881b3c25", {
             method: "GET",
             credentials: "same-origin", // include, *same-origin, omit
             headers: {
@@ -32,12 +32,11 @@ export default class Model extends EventHandler {
      */
     async fetchRates(/*url*/) {
         // ES7 - Async/Await and FetchAPI requesting data from Storage (API) - we are requesting Rates
-        const response = await fetch("https://api.jsonbin.io/b/5edfdde61f9e4e57881a7cbe/20", {
+        const response = await fetch("https://api.jsonbin.io/b/5ee155072f5fd957fda7be3f/latest", {
             method: "GET",
             credentials: "same-origin", // include, *same-origin, omit
             headers: {
-                "Content-Type": "application/json",
-                "secret-key": "$2b$10$ZieyyWLLe6rL9eXtFgI/6.cte.VSFvd6grMohe5MtAIgmahwc3TDC"
+                "Content-Type": "application/json"
             }
         });
 
@@ -54,12 +53,10 @@ export default class Model extends EventHandler {
         let data = this.rates.map(item => item.ProductId == productId ? { ProductId: item.ProductId, Rates: [...item.Rates, rate]} : item);
 
         // ES7 - Async/Await and FetchAPI requesting data from Storage (API) - we are updating data
-        const response = await fetch("https://api.jsonbin.io/b/5edfdde61f9e4e57881a7cbe", {
+        const response = await fetch("https://api.jsonbin.io/b/5ee155072f5fd957fda7be3f", {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json",
-                "secret-key": "$2b$10$ZieyyWLLe6rL9eXtFgI/6.cte.VSFvd6grMohe5MtAIgmahwc3TDC",
-                "versioning": false
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(data) // sending updated array to the Storage (API)
         });
