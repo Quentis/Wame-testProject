@@ -1,0 +1,253 @@
+html {
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust:     100%; 
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+    --color-red: rgb(217, 100, 77);
+
+    --color-star: lightgray;
+    --color-star-hover: black;
+    --color-star-active: orange;
+    --color-gray: lightgray;
+
+    /** For all borders **/
+    --color-border: black;
+    --color-border-active: cornflowerblue;
+
+    --color-submit: black;
+    --color-submit-hover: var(--color-red);
+
+    --color-selected: cornflowerblue;
+
+
+     /** Default font - size & color **/
+    --default-font-size: calc(13px + (17 - 9) * ((100vw - 320px) / (2048 - 320)));
+    --default-line-height: 1.5;
+    --default-text-color: var(--color-black);
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    color: var(--default-text-color);
+    font-size: var(--default-font-size);
+    line-height: var(--default-line-height);
+
+	margin: 0;
+	outline: 0;
+	padding: 0;
+}
+body.waiting * { cursor: wait; } /** used for loading state **/
+
+/** Hide Arrows for type number **/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+input[type=number] { 
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+button:focus { outline: none; }
+
+header { font-size: 3em; }
+
+/*** Classes ***/
+.headline {
+    display: flex;
+    justify-content: center;
+
+    text-align:center;
+    font-size: 2em;
+}
+
+/** Flexbox **/
+.flex-container {
+    display: flex;
+    flex-direction: column; /** Swap vertical and horizontal axis */
+    align-items: center; /** Center horizontally (due to flex-direction change) **/
+}
+
+/** Bottom border after every product except last one, should be done this way by using for-in in VueJS **/
+.flex-container > div:not(:last-child) {  border-bottom: 1px solid black;  }
+
+.item {
+    padding: 36px;
+    width: 50vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+/** Product Item **/
+.item h1 {     
+    margin: 0;
+    font-weight: 1000;
+    font-size: 3em;
+}
+
+.item .rating {
+    padding: 16px 0;
+    color: var(--color-star); 
+}
+.item .rating .fa-star { cursor: pointer; }
+.item .rating > span.focus { color: var(--color-star-hover) !important }
+.item .rating .fa-star.active { color: var(--color-star-active); }
+
+
+.item .price {
+    font-size: 1.5em;
+    font-weight: 600;
+    padding-top: 28px;
+    padding-bottom: 8px;
+    color: var(--color-red);
+}
+.item .price > span { padding-right: 32px; }
+.item .price .old { color: var(--color-gray); }
+
+.item .new-label { 
+    width: 30%;
+    padding: 2px;
+    line-height: 1;
+
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    border: 2px solid var(--color-border);
+    border-radius: 14px;
+
+    transition: background-color 0.4s ease-out;
+}
+.item .new-label:hover { background-color: var(--color-red); }
+
+/* Submit button and Quantity input */
+.item .addToCart { 
+    padding: 36px 0;
+
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.item .addToCart .quantity {
+    flex-grow: 1;
+
+    width: 0; /** Remove default width to grow with flex-box */
+    min-width: 86px;
+
+    padding: 16px 0;
+    margin-right: 18px;
+    margin-top: 12px;
+
+    border: 2px solid var(--color-border);
+    border-radius: 36px;
+
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: center;
+    transition: box-shadow 0.2s ease-in, border 0.2s ease-in;
+
+    cursor: pointer;
+}
+.item .addToCart .quantity:focus {
+    outline: none;
+    border-color: var(--color-border-active);
+    box-shadow: inset 0px 0px 0px 1px var(--color-border-active);
+}
+
+.item .addToCart button {
+    flex-grow: 3;
+    min-width: 122px;
+
+    height: 64px;
+
+    border-radius: 36px;
+    border: 0px;
+
+    background-color: var(--color-submit);
+
+    color: white;
+    font-weight: 600;
+    font-size: 1em;
+
+    /** Gap between input and button **/
+    margin-right: 18px;
+    margin-top: 12px;
+
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.item .inputs button:hover {
+    background-color: var(--color-submit-hover);
+    outline:none;
+}
+
+/*** Item params ***/
+/** Color Params ***/
+.item .color-param { padding-top: 40px; }
+.item .color-param .title { font-weight: bold; }
+
+.color-param .options { 
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.color-param .options > div {
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+
+    margin-top: 18px;
+    margin-right: 18px;
+
+    cursor: pointer;
+
+    transition: box-shadow 0.2s;
+}
+
+.color-param .options > div.active { box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--color-selected); }
+.color-param .options > div:hover { box-shadow: 0 0 0 4px #fff, 0 0 0 6px hsl(227, 77%, 36%); }
+
+.color-param .white {  
+    background-color: white;
+    border: 1px solid black;
+}
+
+.color-param .black {  background-color: black;}
+.color-param .red { background-color: tomato; }
+.color-param .blue { background-color: royalblue; }
+.color-param .yellow { background-color: yellow; }
+.color-param .purple { background-color: blueviolet; }
+
+/*** Misc **/
+.loading {
+    /** Correct position **/
+    position: relative;
+    top: 5px;
+    left: 5px;
+
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+
+    width: 28px;
+    height: 28px;
+
+    animation: rotate 2s linear infinite;
+}
+
+/** Loading Icon animation **/
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+

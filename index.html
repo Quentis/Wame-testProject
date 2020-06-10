@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0">
+    <meta name="description" content="Predaj produktov">
+    <meta name="keywords" content="HTML, CSS, VueJS, JavaScript">
+    <meta name="author" content="Martin Naščák">
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title>Testovaci Web</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script defer type="module" src="./js/main.js"></script>
+
+    <link async rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style/style.css" />
+    <link rel="stylesheet" href="./style/mobile.css" />
+</head>
+<body>
+<div id="app">
+    <!-- Heading text with count of products -->
+    <header class="headline">Products
+        <span v-if="count > 0">({{ count }})</span>
+        <div v-else class="loading"></div>
+    </header>
+    <!-- Load all products from API Storage -->
+    <div class="flex-container">
+        <div v-for="item in products">
+            <!-- single product-->
+            <section class="item">
+                <h1>{{ item.Name }}</h1>
+                <!-- Product Rating -->
+                <nav class="rating">
+                    <span class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) >= 1}" v-on:click="addRate(item.ProductId, 1)" @mouseover="mouseOverRates" @mouseout="mouseOutRates"></span>
+                    <span class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) > 1.5}" v-on:click="addRate(item.ProductId, 2)" @mouseover="mouseOverRates" @mouseout="mouseOutRates"></span>
+                    <span class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) > 2.5}" v-on:click="addRate(item.ProductId, 3)" @mouseover="mouseOverRates" @mouseout="mouseOutRates"></span>
+                    <span class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) > 3.5}" v-on:click="addRate(item.ProductId, 4)" @mouseover="mouseOverRates" @mouseout="mouseOutRates"></span>
+                    <span class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) > 4.5}" v-on:click="addRate(item.ProductId, 5)" @mouseover="mouseOverRates" @mouseout="mouseOutRates"></span>
+                    <span>({{ getAvgRate(item.ProductId) }}) {{ getRatesLength(item.ProductId) }} hodnotení</span>
+                </nav>
+
+                <!-- Product Price section -->
+                <section class="price">
+                    <span> {{ item.Price }} {{ getCurrencySymbol(item.CurrencyCode) }}</span>
+                    <span class="old" v-if="item.Discount"><del>{{ item.OldPrice }} {{ getCurrencySymbol(item.CurrencyCode) }}</del></span>
+                    <span class="old" v-if="item.Discount">{{ item.Discount }}</span>
+                </section>
+                <!-- Product ( New Label ) display only if NewTag is true -->
+                <section class="new-label" v-if="item.NewTag">Novinka</section>
+                <!-- Looping throu all params of product-->
+                <section v-for="(param, index) in item.params">
+                    <!-- Color Param-->
+                    <section class="color-param" v-if="param === 'Color'">
+                        <span class="title">Farba: </span>
+                        <span>{{ item.focusColor }}</span>
+                        <div class="options">
+                            <div v-for="color in item.params[index+1]" v-bind:class="getParamColorClass(item.ProductId, color)" v-on:click="setColor(item.ProductId, color)"></div>
+                        </div>
+                    </section>
+                </section>
+                <!-- Quantity Input and Button (Add to Cart) - Footer section of product -->
+                <footer class="addToCart">
+                    <input class="quantity" type="number" name="quantity" value="1" max="10" @keyup="validateQuantity($event, item.Quantity)" required>
+                    <button class="submit">Pridať do košika</button>
+                </footer>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+@media only screen and (max-width: 760px) {
+    .item { 
+        width: 90vw;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .item .inputs { flex-direction: column; }
+    .item .inputs .quantity { width: 100%; }
+    .item .inputs button { 
+        margin-top: 12px;
+    }
+
+    body { line-height: 0.9; }
+}
