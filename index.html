@@ -55,7 +55,7 @@
                         <span class="title">Farba: </span>
                         <span>{{ item.focusColor }}</span>
                         <div class="options">
-                            <div v-for="color in item.params[index+1]" v-bind:class="getParamColorClass(item.ProductId, color)" v-on:click="setColor(item.ProductId, color)"></div>
+                            <div v-for="color in item.params[index+1]" v-bind:class="getColorClassList(item.ProductId, color)" v-on:click="setColor(item.ProductId, color)"></div>
                         </div>
                     </section>
                 </section>

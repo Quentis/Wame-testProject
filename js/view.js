@@ -26,7 +26,7 @@ export default class View extends EventHandler {
                 addRate: (productId, rate) => this.bindAddRate(productId, rate), /** @onClick - addRate - Send to API Storage updated rate and update the value  */
 
                 /** Color params */
-                getParamColorClass: (productId, color) => { /** returns full className based on ColorStyle conversion and if ColorIsActive (maybe use classList.add) */
+                getColorClassList: (productId, color) => { /** returns full className based on ColorStyle conversion and if ColorIsActive (maybe use classList.add) */
                     return this.getColorStyle(color) + " " + (this.isColorToggled(productId, color) ? "active" : "");
                 },
 
