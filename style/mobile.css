@@ -1,14 +1,15 @@
 @media only screen and (max-width: 760px) {
     .item { 
-        width: 90vw;
+        width: 90vw; /** Fit width of item to 90% of view width for mobiles **/
         padding-left: 8px;
         padding-right: 8px;
     }
-    .item .inputs { flex-direction: column; }
-    .item .inputs .quantity { width: 100%; }
-    .item .inputs button { 
-        margin-top: 12px;
-    }
 
     body { line-height: 0.9; }
+}
+@media only screen and (max-width: 480px) {
+    /** Change addToCart inputs to fit the screen if screen is small **/
+    .item .addToCart { flex-direction: column; } /** Change direction to columns **/
+    .item .addToCart .quantity { width: 100%; }
+    .item .addToCart button { margin-top: 12px; }
 }
