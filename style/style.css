@@ -81,13 +81,17 @@ button:focus { outline: none; }
 header { font-size: 3em; }
 
 /*** Classes ***/
+#app { display:none; } /* prevent to see content before VueJS app is loaded */
+
 .headline {
     display: flex;
     justify-content: center;
+    align-items: center;
 
-    text-align:center;
-    font-size: 2em;
+    font-size: 2rem;
+    padding: 5px;
 }
+.headline > * { margin-left: 6px; }
 
 /** Flexbox **/
 .flex-container {
@@ -308,11 +312,6 @@ header { font-size: 3em; }
 
 /*** Misc **/
 .loading {
-    /** Correct position **/
-    position: relative;
-    top: 50%;
-    left: 5px;
-
     border: 8px solid #f3f3f3;
     border-top: 8px solid #3498db;
     border-radius: 50%;
@@ -321,6 +320,8 @@ header { font-size: 3em; }
     height: 28px;
 
     animation: rotate 2s linear infinite;
+
+    margin: 0 12px;
 }
 
 /** Loading Icon animation **/

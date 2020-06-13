@@ -20,8 +20,9 @@
 <body>
 <div id="app">
     <!-- Heading text with count of products -->
-    <header class="headline">Products
-        <span v-if="count > 0">({{ count }})</span>
+    <header class="headline">
+        <p>Products </p> 
+        <span v-if="count > 0"> ({{ count }}) </span>
         <span v-else class="loading"></span>
     </header>
     <!-- Load all products from API Storage -->

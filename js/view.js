@@ -14,6 +14,10 @@ export default class View extends EventHandler {
                 rates: [], /** Pass array by reference to the vueApp */
                 count: 0
             },
+            created: function() {
+                let app = document.getElementById("app");
+                app.style.display = "block";
+            },
             methods: {
                 validateQuantity: (event, quantity) => this.validateQuantity(event.target, quantity), /** @KeyUP event - Validate if quantity is not passed */
 
