@@ -100,8 +100,11 @@ header { font-size: 3em; }
 .flex-container > div:not(:last-child) {  border-bottom: 1px solid black;  }
 
 .item {
-    margin: 36px;
+    margin: 24px;
+    padding: 12px;
     width: 50vw;
+
+    background-color: whitesmoke;
 
     display: flex;
     flex-direction: column;
@@ -132,12 +135,11 @@ header { font-size: 3em; }
     margin: 8px 0px;
     border-radius: 4px 36px 36px 4px;
 
-    border-right: 50%;
-
     color: var(--color-star);
 
     display:flex;
     align-items: center;
+    flex-wrap: wrap;
 
     list-style-type: none;
 }
@@ -151,6 +153,8 @@ header { font-size: 3em; }
 .item ul li.fa-star.focus { color: var(--color-star-hover) !important }
 .item ul li.fa-star.active { color: var(--color-star-active); }
 
+.item ul li:last-child { flex-wrap: wrap; }
+
 .item .price {
     font-size: 1.5em;
     font-weight: 600;
@@ -162,8 +166,8 @@ header { font-size: 3em; }
 .item .price .old { color: var(--color-gray); }
 
 .item .new-label { 
-    width: 30%;
-    padding: 2px;
+    min-width: 30%;
+    padding: 3px;
     line-height: 1;
 
     text-align: center;
