@@ -16,8 +16,7 @@ export default class Controller {
     /**
      * Load initial data using ES7 -> Async/Await
      */
-    async init()
-    {
+    async init() {
         /** Data taken from Storage API */
         this.model.products = await this.model.fetchProducts(); // Fetch return promise - async code, use .then() for alternate
         this.showProducts(this.model.products);
@@ -33,8 +32,7 @@ export default class Controller {
      */
     showProducts(products) {
         // v prípade ak by sa žiadné udaje nenachadzali v JSON 
-        if (!products || products.length === 0)
-            return;
+        if (!products || products.length === 0) return;
 
         // Loop throu every product
         products.forEach((item) => {
@@ -60,8 +58,7 @@ export default class Controller {
      */
     showRates(rates) {
         // v prípade ak by sa žiadné udaje nenachadzali v JSON 
-        if (!rates || rates.length === 0)
-            return;
+        if (!rates || rates.length === 0) return;
 
         rates.forEach((item) => {
             // Push every item from Rates array

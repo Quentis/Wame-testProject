@@ -1,8 +1,8 @@
 @media only screen and (max-width: 760px) {
     .item { 
         width: 90vw; /** Fit width of item to 90% of view width for mobiles **/
-        padding-left: 8px;
-        padding-right: 8px;
+        margin-left: 8px;
+        margin-right: 8px;
     }
 
     body { line-height: 0.9; }

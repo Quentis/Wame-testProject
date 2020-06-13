@@ -44,8 +44,7 @@ export default class View extends EventHandler {
      * @param {*} quantity - Maximum number (Stocks)
      */
     validateQuantity(element, quantity) {
-        if (element.value > quantity || isNaN(element.valueAsNumber))
-        {
+        if (element.value > quantity || isNaN(element.valueAsNumber)) {
             element.style.borderColor = "red";
             return false;
         }
@@ -57,10 +56,8 @@ export default class View extends EventHandler {
      * return currency symbol based on currencyCode
      * @param {*} currencyCode - CurrencyCode given from API
      */
-    getCurrencySymbol(currencyCode)
-    {
-        switch (currencyCode)
-        {
+    getCurrencySymbol(currencyCode) {
+        switch (currencyCode) {
             case "EUR": return "€";
             case "USD": return "$";
             default: return "€";
@@ -86,8 +83,7 @@ export default class View extends EventHandler {
      * @param {*} productId - Id of product (ProductId)
      * @param {*} color - Color Name
      */
-    isColorToggled(productId, color)
-    {
+    isColorToggled(productId, color) {
         const product = this.getProductById(productId);
 
         if (!product)
@@ -100,10 +96,8 @@ export default class View extends EventHandler {
      * this is tricky function (Only for conversion coz we use english colors in style )
      * @param {*} color - Color properity
      */
-    getColorStyle(color)
-    {
-        switch (color)
-        {
+    getColorStyle(color) {
+        switch (color) {
             case "čierna": return "black";
             case "biela": return "white";
             case "červená": return "red";
@@ -148,12 +142,11 @@ export default class View extends EventHandler {
      * @param {*} productId - Id of product (ProductId)
      */
     getAvgRate(productId) {
-        if (!this.app || !this.app.rates.length === 0)
-            return 0;
+        if (!this.app || !this.app.rates.length === 0)  return 0;
 
         let rates = this.getRatesByProductId(productId);
-        if (!rates || rates.Rates.length === 0)
-            return 0;
+
+        if (!rates || rates.Rates.length === 0) return 0;
 
         let average = rates.Rates.reduce((sum, current) => sum + current, 0) / rates.Rates.length;
         return average.toFixed(2);
@@ -170,8 +163,7 @@ export default class View extends EventHandler {
         else
             element.classList.remove("focus");
 
-        if (element.previousElementSibling == null)
-            return;
+        if (element.previousElementSibling == null) return;
 
         // Self-calling function
         this.onHoverRates(element.previousElementSibling, state);

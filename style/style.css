@@ -42,18 +42,18 @@ html {
 
     /** For all borders **/
     --color-border: black;
-    --color-border-active: cornflowerblue;
+    --color-border-active: darkslategray;
 
+    --color-submit-hover: darkslategray;
     --color-submit: black;
-    --color-submit-hover: var(--color-red);
 
-    --color-selected: cornflowerblue;
+    --color-selected: darkslategray;
 
 
      /** Default font - size & color **/
-    --default-font-size: calc(13px + (17 - 9) * ((100vw - 320px) / (2048 - 320)));
-    --default-line-height: 1.5;
-    --default-text-color: var(--color-black);
+     --default-font-size: calc(13px + (17 - 9) * ((100vw - 320px) / (2048 - 320)));
+     --default-line-height: 1.5;
+     --default-text-color: black;
 }
 
 body {
@@ -100,13 +100,23 @@ header { font-size: 3em; }
 .flex-container > div:not(:last-child) {  border-bottom: 1px solid black;  }
 
 .item {
-    padding: 36px;
+    margin: 36px;
     width: 50vw;
 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-around;
+    
+}
+/** First child animate faster than other childs **/
+.item:first-child { animation: item-load 0.5s ease-out; }
+.item:nth-child(2) { animation: item-load 0.9s ease-out; }
+
+@keyframes item-load {
+    0% { 
+        transform: translateX(-120%);
+    }
 }
 
 /** Product Item **/
@@ -116,14 +126,30 @@ header { font-size: 3em; }
     font-size: 3em;
 }
 
-.item .rating {
-    padding: 16px 0;
-    color: var(--color-star); 
-}
-.item .rating .fa-star { cursor: pointer; }
-.item .rating > span.focus { color: var(--color-star-hover) !important }
-.item .rating .fa-star.active { color: var(--color-star-active); }
+.item ul {
+    background-color: darkslategray;
+    padding: 8px;
+    margin: 8px 0px;
+    border-radius: 4px 36px 36px 4px;
 
+    border-right: 50%;
+
+    color: var(--color-star);
+
+    display:flex;
+    align-items: center;
+
+    list-style-type: none;
+}
+
+.item ul li { 
+    padding: 4px;
+    transition: color 0.2s; 
+}
+
+.item ul li.fa-star { cursor: pointer; }
+.item ul li.fa-star.focus { color: var(--color-star-hover) !important }
+.item ul li.fa-star.active { color: var(--color-star-active); }
 
 .item .price {
     font-size: 1.5em;
@@ -147,7 +173,7 @@ header { font-size: 3em; }
     border: 2px solid var(--color-border);
     border-radius: 14px;
 
-    transition: background-color 0.4s ease-out;
+    transition: background-color 0.2s ease-out;
 }
 .item .new-label:hover { background-color: var(--color-red); }
 
@@ -188,15 +214,18 @@ header { font-size: 3em; }
 }
 
 .item .addToCart button {
+    position: relative;
+
     flex-grow: 3;
     min-width: 122px;
 
     height: 64px;
-
-    border-radius: 36px;
-    border: 0px;
+    z-index: 1;
 
     background-color: var(--color-submit);
+    border-radius: 36px;
+    border: 0px;
+    overflow: hidden;
 
     color: white;
     font-weight: 600;
@@ -206,13 +235,28 @@ header { font-size: 3em; }
     margin-right: 18px;
     margin-top: 12px;
 
-    transition: background-color 0.2s;
     cursor: pointer;
 }
 
-.item .addToCart button:hover {
+.item .addToCart button::before {
+    content: '';
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    height: 0;
+
     background-color: var(--color-submit-hover);
-    outline:none;
+    z-index: -1;
+
+    transition: height 0.4s ease-in-out;
+}
+
+.item .addToCart button:focus::before,
+.item .addToCart button:hover::before {
+    height: 100%;
 }
 
 /*** Item params ***/
@@ -256,7 +300,7 @@ header { font-size: 3em; }
 .loading {
     /** Correct position **/
     position: relative;
-    top: 5px;
+    top: 50%;
     left: 5px;
 
     border: 8px solid #f3f3f3;
