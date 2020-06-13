@@ -51,13 +51,13 @@ html {
 
 
      /** Default font - size & color **/
-     --default-font-size: calc(13px + (17 - 9) * ((100vw - 320px) / (2048 - 320)));
+     --default-font-size: calc(14px + (17 - 9) * ((100vw - 320px) / (2048 - 320)));
      --default-line-height: 1.5;
      --default-text-color: black;
 }
 
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Overlock", sans-serif;
     color: var(--default-text-color);
     font-size: var(--default-font-size);
     line-height: var(--default-line-height);
@@ -129,7 +129,7 @@ header { font-size: 3em; }
     font-size: 3em;
 }
 
-.item ul {
+.item .rating {
     background-color: darkslategray;
     padding: 8px;
     margin: 8px 0px;
@@ -138,22 +138,28 @@ header { font-size: 3em; }
     color: var(--color-star);
 
     display:flex;
-    align-items: center;
     flex-wrap: wrap;
+}
+
+.item ul {
+    display:flex;
+    align-items: center;
 
     list-style-type: none;
+
+    unicode-bidi: bidi-override;
+    direction: rtl;
 }
 
-.item ul li { 
+.item ul li::before { 
     padding: 4px;
-    transition: color 0.2s; 
+    transition: color 0.2s;
 }
-
+.item ul li:first-child { padding-right: 12px; }
 .item ul li.fa-star { cursor: pointer; }
-.item ul li.fa-star.focus { color: var(--color-star-hover) !important }
+.item ul > li.fa-star:hover::before { color: var(--color-star-hover); }
+.item ul > li.fa-star:hover ~ li.fa-star { color: var(--color-star-hover); }
 .item ul li.fa-star.active { color: var(--color-star-active); }
-
-.item ul li:last-child { flex-wrap: wrap; }
 
 .item .price {
     font-size: 1.5em;

@@ -27,13 +27,11 @@ export default class View extends EventHandler {
 
                 /** Color params */
                 getColorClassList: (productId, color) => { /** returns full className based on ColorStyle conversion and if ColorIsActive (maybe use classList.add) */
-                    return this.getColorStyle(color) + " " + (this.isColorToggled(productId, color) ? "active" : "");
+                    return `${this.getColorStyle(color)} ${(this.isColorToggled(productId, color) ? "active" : "")}`;
                 },
 
                 /** Stars */
                 getAvgRate: (productId) => this.getAvgRate(productId), /** returns average value of all rates per product (2 digits after dot) */
-                mouseOverRates: (event) => this.onHoverRates(event.target, true), /** @onMouseOver Change color of stars when hovering them */
-                mouseOutRates: (event) => this.onHoverRates(event.target, false), /** @onMouseOut Change color of stars back */
             }
         });
     }
@@ -150,23 +148,6 @@ export default class View extends EventHandler {
 
         let average = rates.Rates.reduce((sum, current) => sum + current, 0) / rates.Rates.length;
         return average.toFixed(2);
-    }
-
-    /**
-     * Self-Invoking function (add Class "Focus" for target star and all previous siblings)
-     * @param {*} element - HTMLElement (Given from VueJS methods - event.target)
-     * @param {*} state - Boolean - State if @mouseOver or @mouseOut
-     */
-    onHoverRates(element, state) {
-        if (state)
-            element.classList.add("focus");
-        else
-            element.classList.remove("focus");
-
-        if (element.previousElementSibling == null) return;
-
-        // Self-calling function
-        this.onHoverRates(element.previousElementSibling, state);
     }
 
     /**

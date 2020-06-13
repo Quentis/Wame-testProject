@@ -30,14 +30,16 @@
             <!-- single product-->
             <h1>{{ item.Name }}</h1>
             <!-- Product Rating -->
-            <ul class="rating">
-                <li class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) >= 1}" v-on:click="addRate(item.ProductId, 1)" @mouseover="mouseOverRates" @mouseout="mouseOutRates"></li>
-                <li class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) > 1.5}" v-on:click="addRate(item.ProductId, 2)" @mouseover="mouseOverRates" @mouseout="mouseOutRates"></li>
-                <li class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) > 2.5}" v-on:click="addRate(item.ProductId, 3)" @mouseover="mouseOverRates" @mouseout="mouseOutRates"></li>
-                <li class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) > 3.5}" v-on:click="addRate(item.ProductId, 4)" @mouseover="mouseOverRates" @mouseout="mouseOutRates"></li>
-                <li class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) > 4.5}" v-on:click="addRate(item.ProductId, 5)" @mouseover="mouseOverRates" @mouseout="mouseOutRates"></li>
-                <li>({{ getAvgRate(item.ProductId) }}) {{ getRatesLength(item.ProductId) }} hodnotení</li>
-            </ul>
+            <div class="rating">
+                <ul>
+                    <li class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) > 4.5}" v-on:click="addRate(item.ProductId, 5)"></li>
+                    <li class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) > 3.5}" v-on:click="addRate(item.ProductId, 4)"></li>
+                    <li class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) > 2.5}" v-on:click="addRate(item.ProductId, 3)"></li>
+                    <li class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) > 1.5}" v-on:click="addRate(item.ProductId, 2)"></li>
+                    <li class="fa fa-star" v-bind:class="{active: getAvgRate(item.ProductId) >= 1}" v-on:click="addRate(item.ProductId, 1)"></li>
+                </ul>
+                <p>({{ getAvgRate(item.ProductId) }}) {{ getRatesLength(item.ProductId) }} hodnotení</p>
+            </div>
 
             <!-- Product Price section -->
             <section class="price">
